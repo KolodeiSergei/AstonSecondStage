@@ -8,23 +8,21 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "products")
+@Table(name = "users")
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product extends BaseClass{
+public class User extends BaseClass{
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private int id;
     @Column(name = "name")
     private String name;
-    @Column(name = "price")
-    private double price;
-    @Column(name = "calories")
-    private double calories;
+    @Column(name = "age")
+    private int age;
     @Column(name = "weight")
     private double weight;
-    @ManyToMany(mappedBy = "products")
-    private List<Day> days = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Day> days = new ArrayList<Day>();
 }
