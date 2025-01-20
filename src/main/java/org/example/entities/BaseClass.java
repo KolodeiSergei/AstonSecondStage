@@ -12,4 +12,8 @@ public abstract class BaseClass {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "entity_seq", sequenceName = "entity_sequence", allocationSize = 1)
     private int id;
+
+    public String toString() {
+        return "BaseClass(id=" + this.getId() + ")";
+    }
 }

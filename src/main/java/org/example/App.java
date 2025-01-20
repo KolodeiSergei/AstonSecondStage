@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 public class App
 {
     static User user = new User();
@@ -28,12 +30,15 @@ public class App
         try (SessionFactory sf = cfg.buildSessionFactory()) {
             Session session = sf.openSession();
                 session.beginTransaction();
-                session.persist(user);
-                session.persist(day);
-                session.persist(day2);
-                session.persist(day3);
-                session.persist(product);
+//                session.persist(user);
+//                session.persist(day);
+//                session.persist(day2);
+//                session.persist(day3);
+//                session.persist(product);
+                String hql = "FROM User";
+                List<User> entities = session.createQuery(hql, User.class).getResultList();
                 session.getTransaction().commit();
+            System.out.println(entities.size());
 //            Integer  i = 17;
 //            System.out.println(session.find(Day.class,  i));
         }
