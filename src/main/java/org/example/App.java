@@ -1,6 +1,9 @@
 package org.example;
 
 
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.example.entities.BaseClass;
 import org.example.entities.Day;
 import org.example.entities.Product;
@@ -9,7 +12,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class App
 {
@@ -30,10 +35,39 @@ public class App
         try (SessionFactory sf = cfg.buildSessionFactory()) {
             Session session = sf.openSession();
                 session.beginTransaction();
-                String hql = "FROM Day";
+                String hql = "SELECT u FROM Day u JOIN FETCH u.products";
                 List<Day> entities = session.createQuery(hql, Day.class).getResultList();
                 session.getTransaction().commit();
             System.out.println(entities.size());
+
+//            entity---------------------------------------
+
+            EntityManagerFactory emf = sf.unwrap(EntityManagerFactory.class);
+            EntityManager entityManager = emf.createEntityManager();
+
+            entityManager.getTransaction().begin();
+
+            EntityGraph<Day> entityGraph = entityManager.createEntityGraph(Day.class);
+            entityGraph.addAttributeNodes("products");
+
+            Map<String, Object> properties = new HashMap<>();
+            properties.put("javax.persistence.loadgraph", entityGraph);
+
+            Long dayId = 38L;
+            Day day4 = entityManager.find(Day.class, dayId, properties);
+            if (day4 != null) {
+                System.out.println(day4.getProducts().size());
+                if (!day4.getProducts().isEmpty()) {
+                    System.out.println(day4.getProducts().get(0).getName());
+                }
+            }
+            String hql2 = "SELECT u FROM Day u";
+            List<Day> days = entityManager.createQuery(hql2, Day.class).getResultList();
+            entityManager.getTransaction().commit();
+            for (Day day : days) {
+                System.out.println(day.getDay());
+            }
+
         }
     }
     public static void create(){
