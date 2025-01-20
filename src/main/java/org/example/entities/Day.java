@@ -25,7 +25,7 @@ public class Day extends BaseClass {
     private double profCalories;
     @Column(name = "def_calories")
     private double defCalories;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

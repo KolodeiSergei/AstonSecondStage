@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App
@@ -20,28 +21,22 @@ public class App
     static Day day3 = new Day();
     public static void main(String[] args){
         create();
+        List<User> entities = new ArrayList<User>();
         Configuration cfg = new Configuration();
         cfg.addAnnotatedClass(User.class);
         cfg.addAnnotatedClass(Product.class);
         cfg.addAnnotatedClass(Day.class);
         cfg.addAnnotatedClass(BaseClass.class);
-
         cfg.configure();
         try (SessionFactory sf = cfg.buildSessionFactory()) {
             Session session = sf.openSession();
                 session.beginTransaction();
-//                session.persist(user);
-//                session.persist(day);
-//                session.persist(day2);
-//                session.persist(day3);
-//                session.persist(product);
                 String hql = "FROM User";
-                List<User> entities = session.createQuery(hql, User.class).getResultList();
+                entities = session.createQuery(hql, User.class).getResultList();
                 session.getTransaction().commit();
             System.out.println(entities.size());
-//            Integer  i = 17;
-//            System.out.println(session.find(Day.class,  i));
         }
+        System.out.println(entities.get(0).getDays().get(0).getDefCalories());
     }
     public static void create(){
         user.setAge(10);
