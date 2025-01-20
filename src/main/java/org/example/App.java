@@ -1,6 +1,9 @@
 package org.example;
 
 
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.example.entities.BaseClass;
 import org.example.entities.Day;
 import org.example.entities.Product;
@@ -10,16 +13,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class App
-{
+public class App {
     static User user = new User();
     static Product product = new Product();
     static Day day = new Day();
     static Day day2 = new Day();
     static Day day3 = new Day();
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         create();
         List<User> entities = new ArrayList<User>();
         Configuration cfg = new Configuration();
@@ -28,17 +33,48 @@ public class App
         cfg.addAnnotatedClass(Day.class);
         cfg.addAnnotatedClass(BaseClass.class);
         cfg.configure();
+
+
         try (SessionFactory sf = cfg.buildSessionFactory()) {
             Session session = sf.openSession();
-                session.beginTransaction();
-                String hql = "FROM User";
-                entities = session.createQuery(hql, User.class).getResultList();
-                session.getTransaction().commit();
+            session.beginTransaction();
+            String hql = "SELECT u FROM User u JOIN FETCH u.days"; //joinfetch
+            entities = session.createQuery(hql, User.class).getResultList();
+            session.getTransaction().commit();
             System.out.println(entities.size());
+
+            System.out.println(entities.get(0).getDays().get(0).getDefCalories());
+
+            System.out.println("entitygraph");
+
+            EntityManagerFactory emf = sf.unwrap(EntityManagerFactory.class);
+            EntityManager entityManager = emf.createEntityManager();
+
+            entityManager.getTransaction().begin();
+
+            EntityGraph<User> entityGraph = entityManager.createEntityGraph(User.class);
+            entityGraph.addAttributeNodes("days");
+
+            Map<String, Object> properties = new HashMap<>();
+            properties.put("javax.persistence.loadgraph", entityGraph);
+
+            Long userId = 32L;
+            User user = entityManager.find(User.class, userId, properties);
+
+            entityManager.getTransaction().commit();
+
+            if (user != null) {
+                System.out.println(user.getDays().size());
+                if (!user.getDays().isEmpty()) {
+                    System.out.println(user.getDays().get(2).getDefCalories());
+                }
+            }
         }
-        System.out.println(entities.get(0).getDays().get(0).getDefCalories());
+
+
     }
-    public static void create(){
+
+    public static void create() {
         user.setAge(10);
         user.setName("John");
         user.setWeight(80);
