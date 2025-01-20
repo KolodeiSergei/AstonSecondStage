@@ -30,17 +30,10 @@ public class App
         try (SessionFactory sf = cfg.buildSessionFactory()) {
             Session session = sf.openSession();
                 session.beginTransaction();
-//                session.persist(user);
-//                session.persist(day);
-//                session.persist(day2);
-//                session.persist(day3);
-//                session.persist(product);
-                String hql = "FROM User";
-                List<User> entities = session.createQuery(hql, User.class).getResultList();
+                String hql = "FROM Day";
+                List<Day> entities = session.createQuery(hql, Day.class).getResultList();
                 session.getTransaction().commit();
             System.out.println(entities.size());
-//            Integer  i = 17;
-//            System.out.println(session.find(Day.class,  i));
         }
     }
     public static void create(){

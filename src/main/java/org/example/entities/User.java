@@ -25,7 +25,7 @@ public class User extends BaseClass {
     private int age;
     @Column(name = "weight")
     private double weight;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Day> days = new ArrayList<Day>();
 
     public String toString() {

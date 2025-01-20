@@ -28,7 +28,7 @@ public class Day extends BaseClass {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn
     private User user;
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinTable(name = "days_products", joinColumns = @JoinColumn(name = "days_id"),
             inverseJoinColumns = @JoinColumn(name = "products_id"))
     private List<Product> products = new ArrayList<>();
