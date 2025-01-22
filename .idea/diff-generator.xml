@@ -4,5 +4,7 @@
     <option name="snapshotDbValue" value="5f670900-5e45-4ef7-ba58-b559b82e2223" />
     <option name="sourceModelValue" value="secondStage:hibernate.cfg.xml" />
     <option name="targetDbValue" value="9de47a34-1728-4ccc-a4ae-648f62236726" />
+    <option name="updateChangeLogPath" value="src/main/resources/db/changelog/main_changelog.xml" />
+    <option name="updateDbConnectionName" value="5f670900-5e45-4ef7-ba58-b559b82e2223" />
   </component>
 </project>

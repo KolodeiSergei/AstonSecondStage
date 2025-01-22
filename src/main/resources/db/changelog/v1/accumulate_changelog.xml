@@ -8,5 +8,6 @@
     <include file="v1_create_day_table_changelog.xml" relativeToChangelogFile="true"/>
     <include file="v1_create_product_table_changelog.xml" relativeToChangelogFile="true"/>
     <include file="v1_create_days_products_table_changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v1_create_sequence_generation.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
