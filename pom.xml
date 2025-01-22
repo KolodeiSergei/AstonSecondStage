@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <changeLogFile>src/main/resources/db/changelog/main_changelog.xml</changeLogFile>
   </properties>
 
   <dependencies>
@@ -31,6 +32,11 @@
       <artifactId>lombok</artifactId>
       <version>1.18.36</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>4.31.0</version>
     </dependency>
 
 
