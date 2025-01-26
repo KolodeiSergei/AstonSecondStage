@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="v1_create_baseclass_table_changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v1_create_user_table_changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v1_create_day_table_changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v1_create_product_table_changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v1_create_days_products_table_changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v1_create_sequence_generation.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
