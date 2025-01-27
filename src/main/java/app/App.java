@@ -1,7 +1,8 @@
-import entities.BaseClass;
-import entities.Day;
-import entities.Product;
-import entities.User;
+package app;
+
+import app.entities.Day;
+import app.entities.Product;
+import app.entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,17 +20,21 @@ public class App
         cfg.addAnnotatedClass(User.class);
         cfg.addAnnotatedClass(Product.class);
         cfg.addAnnotatedClass(Day.class);
-        cfg.addAnnotatedClass(BaseClass.class);
-
+User user1 = new User();
+        user1.setAge(110);
+        user1.setName("John1");
+        user1.setWeight(81);
+        user1.setEmail("john@gmail.com");
+        user1.setPassword("1234");
         cfg.configure();
         try (SessionFactory sf = cfg.buildSessionFactory()) {
             Session session = sf.openSession();
                 session.beginTransaction();
-                session.persist(user);
-                session.persist(day);
-                session.persist(day2);
-                session.persist(day3);
-                session.persist(product);
+                session.persist(user1);
+//                session.persist(day);
+//                session.persist(day2);
+//                session.persist(day3);
+//                session.persist(product);
                 session.getTransaction().commit();
 //            Integer  i = 17;
 //            System.out.println(session.find(Day.class,  i));
@@ -64,6 +69,8 @@ public class App
         day3.setDay(3);
         product.getDays().add(day2);
         product.getDays().add(day3);
+        user.setEmail("john@gmail.com");
+        user.setPassword("1234");
 
 
     }

@@ -22,6 +22,12 @@
             <column name="weight" type="float">
                 <constraints nullable="true"/>
             </column>
+            <column name="email" type="varchar(64)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 
