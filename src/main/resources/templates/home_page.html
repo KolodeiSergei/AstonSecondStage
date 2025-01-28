@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подсчет калорий</title>
+<!--    <link rel="stylesheet" href="styles.css"> &lt;!&ndash; Подключите свой CSS файл, если нужно &ndash;&gt;-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Подсчет калорий</h1>
+
+<div class="button-container">
+    <button class="button" onclick="location.href='login.html'">Войти</button>
+    <button class="button" onclick="location.href='register.html'">Зарегистрироваться</button>
+</div>
+
+<!-- Если пользователь вошел в систему, отображаем таблицу -->
+<div id="calorie-table" style="display: none;">
+    <h2>Ваши калории</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>День</th>
+            <th>Количество калорий</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Понедельник</td>
+            <td>2000</td>
+        </tr>
+        <tr>
+            <td>Вторник</td>
+            <td>1800</td>
+        </tr>
+        <tr>
+            <td>Среда</td>
+            <td>2200</td>
+        </tr>
+        <tr>
+            <td>Четверг</td>
+            <td>2100</td>
+        </tr>
+        <tr>
+            <td>Пятница</td>
+            <td>1900</td>
+        </tr>
+        <tr>
+            <td>Суббота</td>
+            <td>2300</td>
+        </tr>
+        <tr>
+            <td>Воскресенье</td>
+            <td>2000</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Здесь вы можете добавить логику для проверки, вошел ли пользователь в систему
+    // Например, если пользователь вошел, отобразите таблицу
+    var isLoggedIn = false; // Замените на реальную проверку
+
+    if (isLoggedIn) {
+        document.getElementById('calorie-table').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
